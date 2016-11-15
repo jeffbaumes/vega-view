@@ -5,10 +5,11 @@ import events from './events';
 import hover from './hover';
 import finalize from './finalize';
 import initialize from './initialize';
-import {Canvas, None, SVG} from './render-types';
+import {Canvas, None, SVG, WebGL} from './render-types';
 import renderToImageURL from './render-to-image-url';
 import renderToCanvas from './render-to-canvas';
 import renderToSVG from './render-to-svg';
+import renderToWebGL from './render-to-webgl';
 import {resizeRenderer} from './render-size';
 import runtime from './runtime';
 import {autosize, resizer} from './size';
@@ -138,7 +139,7 @@ prototype.padding = function(_) {
 
 prototype.renderer = function(type) {
   if (!arguments.length) return this._renderType;
-  if (type !== SVG && type !== None) type = Canvas;
+  if (type !== SVG && type !== WebGL && type !== None) type = Canvas;
   if (type !== this._renderType) {
     this._renderType = type;
     if (this._renderer) {

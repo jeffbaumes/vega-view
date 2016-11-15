@@ -1,12 +1,14 @@
 import initializeRenderer from './initialize-renderer';
 
 import {
-  SVG
+  SVG,
+  WebGL
 } from './render-types';
 
 import {
   CanvasRenderer,
-  SVGStringRenderer
+  SVGStringRenderer,
+  WebGLRenderer
 } from 'vega-scenegraph';
 
 /**
@@ -16,7 +18,7 @@ import {
  */
 export default function(view, type) {
   return view.runAsync().then(function() {
-    var renderClass = (type === SVG) ? SVGStringRenderer : CanvasRenderer;
+    var renderClass = (type === SVG) ? SVGStringRenderer : ((type === WebGL) ? WebGLRenderer : CanvasRenderer);
     return initializeRenderer(view, null, null, renderClass)
       .renderAsync(view._scenegraph.root);
   });

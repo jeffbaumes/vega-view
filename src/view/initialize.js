@@ -1,13 +1,15 @@
 import initializeRenderer from './initialize-renderer';
 import initializeHandler from './initialize-handler';
-import {None, SVG} from './render-types';
+import {None, SVG, WebGL} from './render-types';
 
 import {
   CanvasRenderer,
   CanvasHandler,
   SVGRenderer,
   SVGHandler,
-  SVGStringRenderer
+  SVGStringRenderer,
+  WebGLRenderer,
+  WebGLHandler
 } from 'vega-scenegraph';
 
 export default function(el) {
@@ -20,6 +22,10 @@ export default function(el) {
   if (type === SVG) {
     Handler = SVGHandler;
     Renderer = (el ? SVGRenderer : SVGStringRenderer);
+  }
+  if (type === WebGL) {
+    Handler = WebGLHandler;
+    Renderer = WebGLRenderer;
   }
 
   // containing dom element
