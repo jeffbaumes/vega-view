@@ -1,3 +1,4 @@
+import {getCustomRenderer} from './custom-renderers';
 import initializeRenderer from './initialize-renderer';
 import initializeHandler from './initialize-handler';
 import {None, SVG} from './render-types';
@@ -13,6 +14,7 @@ import {
 export default function(el) {
   var view = this,
       type = view._renderType,
+      custom,
       Handler = CanvasHandler,
       Renderer = CanvasRenderer;
 
@@ -20,6 +22,11 @@ export default function(el) {
   if (type === SVG) {
     Handler = SVGHandler;
     Renderer = (el ? SVGRenderer : SVGStringRenderer);
+  }
+  else if (getCustomRenderer(type)) {
+    custom = getCustomRenderer(type);
+    Handler = custom.handler;
+    Renderer = custom.renderer;
   }
 
   // containing dom element

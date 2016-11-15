@@ -1,5 +1,6 @@
 import bind from './bind';
 import cursor from './cursor';
+import {getCustomRenderer} from './custom-renderers';
 import {data, insert, remove} from './data';
 import events from './events';
 import hover from './hover';
@@ -138,7 +139,7 @@ prototype.padding = function(_) {
 
 prototype.renderer = function(type) {
   if (!arguments.length) return this._renderType;
-  if (type !== SVG && type !== None) type = Canvas;
+  if (type !== SVG && type !== None && !getCustomRenderer(type)) type = Canvas;
   if (type !== this._renderType) {
     this._renderType = type;
     if (this._renderer) {

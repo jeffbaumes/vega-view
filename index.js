@@ -11,3 +11,4 @@ transform('Render', Render);
 transform('ViewLayout', ViewLayout);
 
 export {default as View} from './src/view/View';
+export {addCustomRenderer, getCustomRenderer} from './src/view/custom-renderers';
