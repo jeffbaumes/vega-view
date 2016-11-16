@@ -8,8 +8,7 @@ import {
   SVGRenderer,
   SVGHandler,
   SVGStringRenderer,
-  WebGLRenderer,
-  WebGLHandler
+  WebGLRenderer
 } from 'vega-scenegraph';
 
 export default function(el) {
@@ -24,7 +23,7 @@ export default function(el) {
     Renderer = (el ? SVGRenderer : SVGStringRenderer);
   }
   if (type === WebGL) {
-    Handler = WebGLHandler;
+    Handler = CanvasHandler;
     Renderer = WebGLRenderer;
   }
 
